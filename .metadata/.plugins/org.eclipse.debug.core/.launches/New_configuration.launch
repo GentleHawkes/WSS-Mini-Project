@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="tinyos.launch.build">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/ActualNodeA"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<listAttribute key="tinyos.boards"/>
+<booleanAttribute key="tinyos.boards.use-default" value="true"/>
+<booleanAttribute key="tinyos.boards.use-local" value="true"/>
+<stringAttribute key="tinyos.component" value=""/>
+<stringAttribute key="tinyos.component-file" value="/ActualNodeA/src/NodeAAppC.nc"/>
+<booleanAttribute key="tinyos.component-file.use-default" value="false"/>
+<booleanAttribute key="tinyos.component-file.use-local" value="true"/>
+<booleanAttribute key="tinyos.component.use-default" value="true"/>
+<booleanAttribute key="tinyos.component.use-local" value="false"/>
+<listAttribute key="tinyos.environment_variables.keys"/>
+<booleanAttribute key="tinyos.environment_variables.use-default" value="true"/>
+<booleanAttribute key="tinyos.environment_variables.use-local" value="true"/>
+<listAttribute key="tinyos.environment_variables.values"/>
+<listAttribute key="tinyos.excludes"/>
+<booleanAttribute key="tinyos.excludes.use-default" value="true"/>
+<booleanAttribute key="tinyos.excludes.use-local" value="true"/>
+<booleanAttribute key="tinyos.include-env-default-paths" value="false"/>
+<booleanAttribute key="tinyos.include-env-default-paths.use-default" value="false"/>
+<booleanAttribute key="tinyos.include-env-default-paths.use-local" value="true"/>
+<booleanAttribute key="tinyos.include-last-build" value="false"/>
+<booleanAttribute key="tinyos.include-last-build.use-default" value="false"/>
+<booleanAttribute key="tinyos.include-last-build.use-local" value="true"/>
+<listAttribute key="tinyos.includes"/>
+<booleanAttribute key="tinyos.includes.use-default" value="true"/>
+<booleanAttribute key="tinyos.includes.use-local" value="true"/>
+<listAttribute key="tinyos.macros.include.ncc"/>
+<listAttribute key="tinyos.macros.include.yeti"/>
+<listAttribute key="tinyos.macros.names"/>
+<booleanAttribute key="tinyos.macros.use-default" value="true"/>
+<booleanAttribute key="tinyos.macros.use-local" value="true"/>
+<listAttribute key="tinyos.macros.values"/>
+<listAttribute key="tinyos.make-extras.names">
+<listEntry value="install"/>
+</listAttribute>
+<mapAttribute key="tinyos.make-extras.pAsk">
+<mapEntry key="install" value="false"/>
+</mapAttribute>
+<mapAttribute key="tinyos.make-extras.pNames">
+<mapEntry key="install" value="Mote Id"/>
+</mapAttribute>
+<mapAttribute key="tinyos.make-extras.pValues">
+<mapEntry key="install" value=""/>
+</mapAttribute>
+<booleanAttribute key="tinyos.make-extras.use-default" value="true"/>
+<booleanAttribute key="tinyos.make-extras.use-local" value="true"/>
+<booleanAttribute key="tinyos.no-std-incl" value="false"/>
+<booleanAttribute key="tinyos.no-std-incl.use-default" value="false"/>
+<booleanAttribute key="tinyos.no-std-incl.use-local" value="true"/>
+<stringAttribute key="tinyos.project" value="ActualNodeA"/>
+<booleanAttribute key="tinyos.project.use-default" value="false"/>
+<booleanAttribute key="tinyos.project.use-local" value="true"/>
+<stringAttribute key="tinyos.target" value="telosb"/>
+<booleanAttribute key="tinyos.target.use-default" value="false"/>
+<booleanAttribute key="tinyos.target.use-local" value="true"/>
+<listAttribute key="tinyos.typedefs.names"/>
+<listAttribute key="tinyos.typedefs.types"/>
+<booleanAttribute key="tinyos.typedefs.use-default" value="true"/>
+<booleanAttribute key="tinyos.typedefs.use-local" value="true"/>
+</launchConfiguration>
