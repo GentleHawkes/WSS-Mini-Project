@@ -16,7 +16,6 @@ enum {
 	NODE_B_ADDR = 2,
 	NODE_C_ADDR = 3
 };
-
 typedef nx_struct NodeAProbeMsg {
   nx_uint16_t nodeid;
   nx_uint16_t SeqCounter;
@@ -25,11 +24,5 @@ typedef nx_struct NodeAProbeMsg {
 typedef nx_struct NodeADataMsg{
   
 } NodeADataMsg;
-
-typedef struct {
-	uint8_t rssi;
-	uint8_t lqi;
-} statTuple;
-
 
 #endif /* NODE_A_H */

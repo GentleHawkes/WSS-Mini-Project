@@ -24,7 +24,7 @@ implementation{
   message_t pkt;
   
   uint8_t statRCounter = 0;
-  uint8_t statSCounter = 0;
+  uint16_t statSCounter = 0;
   static statTuple receivedStats[1000];
   static statTuple sentStats[1000];
   
@@ -93,6 +93,7 @@ implementation{
 	event void DataSnd.sendDone(message_t *msg, error_t error){
 		sentStats[statSCounter++].rssi = call CC2420Packet.getRssi(msg);
 		sentStats[statSCounter++].lqi = call CC2420Packet.getLqi(msg);
+		
 	}
 
 	event message_t * DataRcv.receive(message_t *msg, void *payload, uint8_t len){
