@@ -1,7 +1,7 @@
 #ifndef NODE_A_H
 #define NODE_A_H
 enum {
-   AM_PROBE_SND = 11,
+   AM_PROBE_SND = 6,
    AM_PROBE_ACK = 12,
    TIMER_PERIOD_MILLI = 250,
    SEND_PROBE_INTER_MS = 1000,

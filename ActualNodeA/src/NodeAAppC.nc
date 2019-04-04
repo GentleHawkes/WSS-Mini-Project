@@ -12,7 +12,7 @@ implementation{
   components new TimerMilliC() as Timer3;
   components ActiveMessageC;
   components new AMSenderC(AM_PROBE_SND);
-  components new AMReceiverC(AM_PROBE_ACK);
+  components new AMReceiverC(AM_PROBE_SND);
 
   App.Boot -> MainC;
   App.Leds -> LedsC;
