@@ -1,0 +1,9 @@
+
+.metadata/.plugins/org.eclipse.core.resources/.history/*
+
+*.index
+*.snap
+ActualNodeA/build/telosb/app.c
+*.ihex
+ActualNodeA/build/telosb/tos_image.xml
+.metadata/.plugins/org.eclipse.core.resources/.projects/ActualNodeA/.indexes/e4/history.index
