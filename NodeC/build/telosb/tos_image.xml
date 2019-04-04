@@ -1,11 +1,11 @@
 <tos_image>
   <ident>
-    <uidhash>C3928966L</uidhash>
+    <uidhash>1097E73BL</uidhash>
     <hostname>ubuntu</hostname>
     <username>tinyos</username>
-    <appname>/mnt/hgfs/WSS-M</appname>
+    <appname>/mnt/NodeC/src/</appname>
     <userhash>29AC8746L</userhash>
-    <timestamp>5CA62295L</timestamp>
+    <timestamp>5CA626CCL</timestamp>
     <deluge_support>no</deluge_support>
     <platform>telosb</platform>
   </ident>

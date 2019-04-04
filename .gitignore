@@ -11,3 +11,4 @@ ActualNodeA/.cache/*
 */.cache/*
 NodeB/build/telosb/app.c
 NodeB/build/telosb/tos_image.xml
+NodeC/build/telosb/app.c
