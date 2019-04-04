@@ -944,7 +944,7 @@ typedef struct __nesc_unnamed4262 {
 } 
 #line 31
 TMicro;
-# 3 "/mnt/NodeC/src/NodeA.h"
+# 3 "/mnt/hgfs/WSS-Mini-Project/NodeC/src/NodeC.h"
 enum __nesc_unnamed4263 {
   AM_PROBE_SND = 6, 
   AM_PROBE_ACK = 12, 
@@ -1856,10 +1856,10 @@ typedef struct timesync_footer_t {
   nx_am_id_t type;
   timesync_radio_t timestamp;
 } timesync_footer_t;
-typedef TMilli NodeAC__TimerData__precision_tag;
-typedef TMilli NodeAC__TimeOutProbe__precision_tag;
-typedef TMilli NodeAC__TimeOutData__precision_tag;
-typedef TMilli NodeAC__TimerProbe__precision_tag;
+typedef TMilli NodeCC__TimerData__precision_tag;
+typedef TMilli NodeCC__TimeOutProbe__precision_tag;
+typedef TMilli NodeCC__TimeOutData__precision_tag;
+typedef TMilli NodeCC__TimerProbe__precision_tag;
 enum /*HilTimerMilliC.AlarmMilli32C.AlarmFrom.Msp430Timer*/Msp430Timer32khzC__0____nesc_unnamed4296 {
   Msp430Timer32khzC__0__ALARM_ID = 0U
 };
@@ -2364,17 +2364,17 @@ static void /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__GeneralIO__makeOutput(void
 #line 29
 static void /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__GeneralIO__set(void );
 # 72 "/opt/tinyos-2.1.1/tos/lib/timer/Timer.nc"
-static void NodeAC__TimerData__fired(void );
+static void NodeCC__TimerData__fired(void );
 #line 72
-static void NodeAC__TimeOutProbe__fired(void );
+static void NodeCC__TimeOutProbe__fired(void );
 # 92 "/opt/tinyos-2.1.1/tos/interfaces/SplitControl.nc"
-static void NodeAC__AMControl__startDone(error_t error);
+static void NodeCC__AMControl__startDone(error_t error);
 #line 117
-static void NodeAC__AMControl__stopDone(error_t error);
+static void NodeCC__AMControl__stopDone(error_t error);
 # 49 "/opt/tinyos-2.1.1/tos/interfaces/Boot.nc"
-static void NodeAC__Boot__booted(void );
+static void NodeCC__Boot__booted(void );
 # 72 "/opt/tinyos-2.1.1/tos/lib/timer/Timer.nc"
-static void NodeAC__TimeOutData__fired(void );
+static void NodeCC__TimeOutData__fired(void );
 # 67 "/opt/tinyos-2.1.1/tos/interfaces/Receive.nc"
 static 
 #line 63
@@ -2382,7 +2382,7 @@ message_t *
 
 
 
-NodeAC__ProbeRcv__receive(
+NodeCC__ProbeRcv__receive(
 #line 60
 message_t * msg, 
 void * payload, 
@@ -2393,7 +2393,7 @@ void * payload,
 
 uint8_t len);
 # 99 "/opt/tinyos-2.1.1/tos/interfaces/AMSend.nc"
-static void NodeAC__ProbeSnd__sendDone(
+static void NodeCC__ProbeSnd__sendDone(
 #line 92
 message_t * msg, 
 
@@ -2404,7 +2404,7 @@ message_t * msg,
 
 error_t error);
 # 72 "/opt/tinyos-2.1.1/tos/lib/timer/Timer.nc"
-static void NodeAC__TimerProbe__fired(void );
+static void NodeCC__TimerProbe__fired(void );
 # 34 "/opt/tinyos-2.1.1/tos/chips/msp430/timer/Msp430Compare.nc"
 static void /*HilTimerMilliC.AlarmMilli32C.AlarmFrom.Msp430Alarm*/Msp430AlarmC__0__Msp430Compare__fired(void );
 # 37 "/opt/tinyos-2.1.1/tos/chips/msp430/timer/Msp430Timer.nc"
@@ -3597,7 +3597,7 @@ message_t * amsg);
 # 92 "/opt/tinyos-2.1.1/tos/interfaces/Resource.nc"
 static void CC2420ActiveMessageP__RadioResource__granted(void );
 # 69 "/opt/tinyos-2.1.1/tos/interfaces/AMSend.nc"
-static error_t /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__send(am_addr_t addr, 
+static error_t /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__send(am_addr_t addr, 
 #line 60
 message_t * msg, 
 
@@ -3610,7 +3610,7 @@ message_t * msg,
 
 uint8_t len);
 # 89 "/opt/tinyos-2.1.1/tos/interfaces/Send.nc"
-static void /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__sendDone(
+static void /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__sendDone(
 #line 85
 message_t * msg, 
 
@@ -3620,7 +3620,7 @@ error_t error);
 # 99 "/opt/tinyos-2.1.1/tos/interfaces/AMSend.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__sendDone(
 # 40 "/opt/tinyos-2.1.1/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x40ff4c40, 
+am_id_t arg_0x40ff3c40, 
 # 92 "/opt/tinyos-2.1.1/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -3633,7 +3633,7 @@ error_t error);
 # 64 "/opt/tinyos-2.1.1/tos/interfaces/Send.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__send(
 # 38 "/opt/tinyos-2.1.1/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x40ff4258, 
+uint8_t arg_0x40ff3258, 
 # 56 "/opt/tinyos-2.1.1/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -3647,7 +3647,7 @@ uint8_t len);
 #line 89
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__sendDone(
 # 38 "/opt/tinyos-2.1.1/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x40ff4258, 
+uint8_t arg_0x40ff3258, 
 # 85 "/opt/tinyos-2.1.1/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -4510,16 +4510,16 @@ static inline void /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__GeneralIO__toggle(v
 
 static inline void /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__GeneralIO__makeOutput(void );
 # 62 "/opt/tinyos-2.1.1/tos/lib/timer/Timer.nc"
-static void NodeAC__TimeOutProbe__startOneShot(uint32_t dt);
+static void NodeCC__TimeOutProbe__startOneShot(uint32_t dt);
 # 83 "/opt/tinyos-2.1.1/tos/interfaces/SplitControl.nc"
-static error_t NodeAC__AMControl__start(void );
+static error_t NodeCC__AMControl__start(void );
 # 115 "/opt/tinyos-2.1.1/tos/interfaces/Packet.nc"
 static 
 #line 112
 void * 
 
 
-NodeAC__Packet__getPayload(
+NodeCC__Packet__getPayload(
 #line 110
 message_t * msg, 
 
@@ -4528,15 +4528,15 @@ message_t * msg,
 
 uint8_t len);
 # 48 "/opt/tinyos-2.1.1/tos/interfaces/PacketAcknowledgements.nc"
-static error_t NodeAC__packAck__requestAck(
+static error_t NodeCC__packAck__requestAck(
 #line 42
 message_t * msg);
 #line 74
-static bool NodeAC__packAck__wasAcked(
+static bool NodeCC__packAck__wasAcked(
 #line 69
 message_t * msg);
 # 69 "/opt/tinyos-2.1.1/tos/interfaces/AMSend.nc"
-static error_t NodeAC__ProbeSnd__send(am_addr_t addr, 
+static error_t NodeCC__ProbeSnd__send(am_addr_t addr, 
 #line 60
 message_t * msg, 
 
@@ -4549,26 +4549,24 @@ message_t * msg,
 
 uint8_t len);
 # 56 "/opt/tinyos-2.1.1/tos/interfaces/Leds.nc"
-static void NodeAC__Leds__led0Toggle(void );
+static void NodeCC__Leds__led0Toggle(void );
 #line 72
-static void NodeAC__Leds__led1Toggle(void );
+static void NodeCC__Leds__led1Toggle(void );
 #line 89
-static void NodeAC__Leds__led2Toggle(void );
+static void NodeCC__Leds__led2Toggle(void );
 # 53 "/opt/tinyos-2.1.1/tos/lib/timer/Timer.nc"
-static void NodeAC__TimerProbe__startPeriodic(uint32_t dt);
-# 24 "/mnt/NodeC/src/NodeAC.nc"
-bool NodeAC__busy = FALSE;
-message_t NodeAC__pkt;
+static void NodeCC__TimerProbe__startPeriodic(uint32_t dt);
+# 24 "/mnt/hgfs/WSS-Mini-Project/NodeC/src/NodeCC.nc"
+bool NodeCC__busy = FALSE;
+message_t NodeCC__pkt;
 
-int NodeAC__dest = NODE_A_ADDR;
+int NodeCC__dest = NODE_A_ADDR;
 
-static inline void NodeAC__Boot__booted(void );
-
-
-
-static inline void NodeAC__AMControl__startDone(error_t err);
+static inline void NodeCC__Boot__booted(void );
 
 
+
+static inline void NodeCC__AMControl__startDone(error_t err);
 
 
 
@@ -4576,12 +4574,14 @@ static inline void NodeAC__AMControl__startDone(error_t err);
 
 
 
-static inline void NodeAC__AMControl__stopDone(error_t err);
 
 
-static inline void NodeAC__TimerProbe__fired(void );
+static inline void NodeCC__AMControl__stopDone(error_t err);
+
+
+static inline void NodeCC__TimerProbe__fired(void );
 #line 76
-static void NodeAC__ProbeSnd__sendDone(message_t *msg, error_t error);
+static void NodeCC__ProbeSnd__sendDone(message_t *msg, error_t error);
 
 
 
@@ -4592,19 +4592,19 @@ static void NodeAC__ProbeSnd__sendDone(message_t *msg, error_t error);
 
 
 
-static inline void NodeAC__TimerData__fired(void );
+static inline void NodeCC__TimerData__fired(void );
 
 
 
-static inline void NodeAC__TimeOutData__fired(void );
+static inline void NodeCC__TimeOutData__fired(void );
 
 
 
-static inline void NodeAC__TimeOutProbe__fired(void );
+static inline void NodeCC__TimeOutProbe__fired(void );
 
 
 
-static inline message_t *NodeAC__ProbeRcv__receive(message_t *msg, void *payload, uint8_t len);
+static inline message_t *NodeCC__ProbeRcv__receive(message_t *msg, void *payload, uint8_t len);
 # 30 "/opt/tinyos-2.1.1/tos/chips/msp430/timer/Msp430Compare.nc"
 static void /*HilTimerMilliC.AlarmMilli32C.AlarmFrom.Msp430Alarm*/Msp430AlarmC__0__Msp430Compare__setEvent(uint16_t time);
 
@@ -7457,7 +7457,7 @@ message_t *msg);
 static inline void CC2420ActiveMessageP__RadioBackoff__default__requestCca(am_id_t id, 
 message_t *msg);
 # 99 "/opt/tinyos-2.1.1/tos/interfaces/AMSend.nc"
-static void /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__sendDone(
+static void /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__sendDone(
 #line 92
 message_t * msg, 
 
@@ -7468,7 +7468,7 @@ message_t * msg,
 
 error_t error);
 # 64 "/opt/tinyos-2.1.1/tos/interfaces/Send.nc"
-static error_t /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__send(
+static error_t /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__send(
 #line 56
 message_t * msg, 
 
@@ -7480,7 +7480,7 @@ message_t * msg,
 
 uint8_t len);
 # 92 "/opt/tinyos-2.1.1/tos/interfaces/AMPacket.nc"
-static void /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setDestination(
+static void /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setDestination(
 #line 88
 message_t * amsg, 
 
@@ -7488,7 +7488,7 @@ message_t * amsg,
 
 am_addr_t addr);
 #line 151
-static void /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setType(
+static void /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setType(
 #line 147
 message_t * amsg, 
 
@@ -7496,7 +7496,7 @@ message_t * amsg,
 
 am_id_t t);
 # 45 "/opt/tinyos-2.1.1/tos/system/AMQueueEntryP.nc"
-static inline error_t /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__send(am_addr_t dest, 
+static inline error_t /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__send(am_addr_t dest, 
 message_t *msg, 
 uint8_t len);
 
@@ -7508,11 +7508,11 @@ uint8_t len);
 
 
 
-static inline void /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__sendDone(message_t *m, error_t err);
+static inline void /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__sendDone(message_t *m, error_t err);
 # 69 "/opt/tinyos-2.1.1/tos/interfaces/AMSend.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(
 # 40 "/opt/tinyos-2.1.1/tos/system/AMQueueImplP.nc"
-am_id_t arg_0x40ff4c40, 
+am_id_t arg_0x40ff3c40, 
 # 69 "/opt/tinyos-2.1.1/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 60
@@ -7529,7 +7529,7 @@ uint8_t len);
 # 89 "/opt/tinyos-2.1.1/tos/interfaces/Send.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(
 # 38 "/opt/tinyos-2.1.1/tos/system/AMQueueImplP.nc"
-uint8_t arg_0x40ff4258, 
+uint8_t arg_0x40ff3258, 
 # 85 "/opt/tinyos-2.1.1/tos/interfaces/Send.nc"
 message_t * msg, 
 
@@ -11899,17 +11899,17 @@ inline static bool RealMainP__Scheduler__runNextTask(void ){
 }
 #line 54
 # 99 "/opt/tinyos-2.1.1/tos/interfaces/AMSend.nc"
-inline static void /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__sendDone(message_t * msg, error_t error){
+inline static void /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__sendDone(message_t * msg, error_t error){
 #line 99
-  NodeAC__ProbeSnd__sendDone(msg, error);
+  NodeCC__ProbeSnd__sendDone(msg, error);
 #line 99
 }
 #line 99
 # 57 "/opt/tinyos-2.1.1/tos/system/AMQueueEntryP.nc"
-static inline void /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__sendDone(message_t *m, error_t err)
+static inline void /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__sendDone(message_t *m, error_t err)
 #line 57
 {
-  /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__sendDone(m, err);
+  /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__sendDone(m, err);
 }
 
 # 207 "/opt/tinyos-2.1.1/tos/system/AMQueueImplP.nc"
@@ -11919,19 +11919,19 @@ static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__send
 }
 
 # 89 "/opt/tinyos-2.1.1/tos/interfaces/Send.nc"
-inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(uint8_t arg_0x40ff4258, message_t * msg, error_t error){
+inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__sendDone(uint8_t arg_0x40ff3258, message_t * msg, error_t error){
 #line 89
-  switch (arg_0x40ff4258) {
+  switch (arg_0x40ff3258) {
 #line 89
     case 0U:
 #line 89
-      /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__sendDone(msg, error);
+      /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__sendDone(msg, error);
 #line 89
       break;
 #line 89
     default:
 #line 89
-      /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__sendDone(arg_0x40ff4258, msg, error);
+      /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__default__sendDone(arg_0x40ff3258, msg, error);
 #line 89
       break;
 #line 89
@@ -12034,7 +12034,7 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 }
 
 # 62 "/opt/tinyos-2.1.1/tos/lib/timer/Timer.nc"
-inline static void NodeAC__TimeOutProbe__startOneShot(uint32_t dt){
+inline static void NodeCC__TimeOutProbe__startOneShot(uint32_t dt){
 #line 62
   /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startOneShot(3U, dt);
 #line 62
@@ -12063,7 +12063,7 @@ static inline bool CC2420PacketP__Acks__wasAcked(message_t *p_msg)
 }
 
 # 74 "/opt/tinyos-2.1.1/tos/interfaces/PacketAcknowledgements.nc"
-inline static bool NodeAC__packAck__wasAcked(message_t * msg){
+inline static bool NodeCC__packAck__wasAcked(message_t * msg){
 #line 74
   unsigned char __nesc_result;
 #line 74
@@ -12122,7 +12122,7 @@ static inline void LedsP__Leds__led1Toggle(void )
 }
 
 # 72 "/opt/tinyos-2.1.1/tos/interfaces/Leds.nc"
-inline static void NodeAC__Leds__led1Toggle(void ){
+inline static void NodeCC__Leds__led1Toggle(void ){
 #line 72
   LedsP__Leds__led1Toggle();
 #line 72
@@ -12151,13 +12151,13 @@ inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__errorTask__postT
 }
 #line 56
 # 69 "/opt/tinyos-2.1.1/tos/interfaces/AMSend.nc"
-inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(am_id_t arg_0x40ff4c40, am_addr_t addr, message_t * msg, uint8_t len){
+inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(am_id_t arg_0x40ff3c40, am_addr_t addr, message_t * msg, uint8_t len){
 #line 69
   unsigned char __nesc_result;
 #line 69
 
 #line 69
-  __nesc_result = CC2420ActiveMessageP__AMSend__send(arg_0x40ff4c40, addr, msg, len);
+  __nesc_result = CC2420ActiveMessageP__AMSend__send(arg_0x40ff3c40, addr, msg, len);
 #line 69
 
 #line 69
@@ -13330,18 +13330,18 @@ static inline void LedsP__Leds__led2Toggle(void )
 }
 
 # 89 "/opt/tinyos-2.1.1/tos/interfaces/Leds.nc"
-inline static void NodeAC__Leds__led2Toggle(void ){
+inline static void NodeCC__Leds__led2Toggle(void ){
 #line 89
   LedsP__Leds__led2Toggle();
 #line 89
 }
 #line 89
-# 99 "/mnt/NodeC/src/NodeAC.nc"
-static inline message_t *NodeAC__ProbeRcv__receive(message_t *msg, void *payload, uint8_t len)
+# 99 "/mnt/hgfs/WSS-Mini-Project/NodeC/src/NodeCC.nc"
+static inline message_t *NodeCC__ProbeRcv__receive(message_t *msg, void *payload, uint8_t len)
 #line 99
 {
 
-  NodeAC__Leds__led2Toggle();
+  NodeCC__Leds__led2Toggle();
   return msg;
 }
 
@@ -13363,7 +13363,7 @@ inline static message_t * CC2420ActiveMessageP__Receive__receive(am_id_t arg_0x4
 #line 67
     case 6:
 #line 67
-      __nesc_result = NodeAC__ProbeRcv__receive(msg, payload, len);
+      __nesc_result = NodeCC__ProbeRcv__receive(msg, payload, len);
 #line 67
       break;
 #line 67
@@ -15770,8 +15770,8 @@ static inline void CC2420CsmaP__sendDone_task__runTask(void )
   CC2420CsmaP__Send__sendDone(CC2420CsmaP__m_msg, packetErr);
 }
 
-# 43 "/mnt/NodeC/src/NodeAC.nc"
-static inline void NodeAC__AMControl__stopDone(error_t err)
+# 43 "/mnt/hgfs/WSS-Mini-Project/NodeC/src/NodeCC.nc"
+static inline void NodeCC__AMControl__stopDone(error_t err)
 #line 43
 {
 }
@@ -15779,7 +15779,7 @@ static inline void NodeAC__AMControl__stopDone(error_t err)
 # 117 "/opt/tinyos-2.1.1/tos/interfaces/SplitControl.nc"
 inline static void CC2420CsmaP__SplitControl__stopDone(error_t error){
 #line 117
-  NodeAC__AMControl__stopDone(error);
+  NodeCC__AMControl__stopDone(error);
 #line 117
 }
 #line 117
@@ -15792,7 +15792,7 @@ static inline void CC2420CsmaP__stopDone_task__runTask(void )
 }
 
 # 83 "/opt/tinyos-2.1.1/tos/interfaces/SplitControl.nc"
-inline static error_t NodeAC__AMControl__start(void ){
+inline static error_t NodeCC__AMControl__start(void ){
 #line 83
   unsigned char __nesc_result;
 #line 83
@@ -15813,29 +15813,29 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 }
 
 # 53 "/opt/tinyos-2.1.1/tos/lib/timer/Timer.nc"
-inline static void NodeAC__TimerProbe__startPeriodic(uint32_t dt){
+inline static void NodeCC__TimerProbe__startPeriodic(uint32_t dt){
 #line 53
   /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(0U, dt);
 #line 53
 }
 #line 53
-# 33 "/mnt/NodeC/src/NodeAC.nc"
-static inline void NodeAC__AMControl__startDone(error_t err)
+# 33 "/mnt/hgfs/WSS-Mini-Project/NodeC/src/NodeCC.nc"
+static inline void NodeCC__AMControl__startDone(error_t err)
 #line 33
 {
   if (err == SUCCESS) {
-      NodeAC__TimerProbe__startPeriodic(TIMER_PERIOD_MILLI);
+      NodeCC__TimerProbe__startPeriodic(TIMER_PERIOD_MILLI);
     }
   else 
     {
-      NodeAC__AMControl__start();
+      NodeCC__AMControl__start();
     }
 }
 
 # 92 "/opt/tinyos-2.1.1/tos/interfaces/SplitControl.nc"
 inline static void CC2420CsmaP__SplitControl__startDone(error_t error){
 #line 92
-  NodeAC__AMControl__startDone(error);
+  NodeCC__AMControl__startDone(error);
 #line 92
 }
 #line 92
@@ -16355,7 +16355,7 @@ static inline void LedsP__Leds__led0Toggle(void )
 }
 
 # 56 "/opt/tinyos-2.1.1/tos/interfaces/Leds.nc"
-inline static void NodeAC__Leds__led0Toggle(void ){
+inline static void NodeCC__Leds__led0Toggle(void ){
 #line 56
   LedsP__Leds__led0Toggle();
 #line 56
@@ -16415,7 +16415,7 @@ uint8_t len)
 }
 
 # 64 "/opt/tinyos-2.1.1/tos/interfaces/Send.nc"
-inline static error_t /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__send(message_t * msg, uint8_t len){
+inline static error_t /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__send(message_t * msg, uint8_t len){
 #line 64
   unsigned char __nesc_result;
 #line 64
@@ -16440,7 +16440,7 @@ static inline void CC2420ActiveMessageP__AMPacket__setType(message_t *amsg, am_i
 }
 
 # 151 "/opt/tinyos-2.1.1/tos/interfaces/AMPacket.nc"
-inline static void /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setType(message_t * amsg, am_id_t t){
+inline static void /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setType(message_t * amsg, am_id_t t){
 #line 151
   CC2420ActiveMessageP__AMPacket__setType(amsg, t);
 #line 151
@@ -16457,31 +16457,31 @@ static inline void CC2420ActiveMessageP__AMPacket__setDestination(message_t *ams
 }
 
 # 92 "/opt/tinyos-2.1.1/tos/interfaces/AMPacket.nc"
-inline static void /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setDestination(message_t * amsg, am_addr_t addr){
+inline static void /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setDestination(message_t * amsg, am_addr_t addr){
 #line 92
   CC2420ActiveMessageP__AMPacket__setDestination(amsg, addr);
 #line 92
 }
 #line 92
 # 45 "/opt/tinyos-2.1.1/tos/system/AMQueueEntryP.nc"
-static inline error_t /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__send(am_addr_t dest, 
+static inline error_t /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__send(am_addr_t dest, 
 message_t *msg, 
 uint8_t len)
 #line 47
 {
-  /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setDestination(msg, dest);
-  /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setType(msg, 6);
-  return /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__send(msg, len);
+  /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setDestination(msg, dest);
+  /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setType(msg, 6);
+  return /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__send(msg, len);
 }
 
 # 69 "/opt/tinyos-2.1.1/tos/interfaces/AMSend.nc"
-inline static error_t NodeAC__ProbeSnd__send(am_addr_t addr, message_t * msg, uint8_t len){
+inline static error_t NodeCC__ProbeSnd__send(am_addr_t addr, message_t * msg, uint8_t len){
 #line 69
   unsigned char __nesc_result;
 #line 69
 
 #line 69
-  __nesc_result = /*NodeAAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__send(addr, msg, len);
+  __nesc_result = /*NodeCAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__send(addr, msg, len);
 #line 69
 
 #line 69
@@ -16501,7 +16501,7 @@ static inline error_t CC2420PacketP__Acks__requestAck(message_t *p_msg)
 }
 
 # 48 "/opt/tinyos-2.1.1/tos/interfaces/PacketAcknowledgements.nc"
-inline static error_t NodeAC__packAck__requestAck(message_t * msg){
+inline static error_t NodeCC__packAck__requestAck(message_t * msg){
 #line 48
   unsigned char __nesc_result;
 #line 48
@@ -16552,7 +16552,7 @@ static inline void *CC2420ActiveMessageP__Packet__getPayload(message_t *msg, uin
 }
 
 # 115 "/opt/tinyos-2.1.1/tos/interfaces/Packet.nc"
-inline static void * NodeAC__Packet__getPayload(message_t * msg, uint8_t len){
+inline static void * NodeCC__Packet__getPayload(message_t * msg, uint8_t len){
 #line 115
   void *__nesc_result;
 #line 115
@@ -16566,14 +16566,14 @@ inline static void * NodeAC__Packet__getPayload(message_t * msg, uint8_t len){
 #line 115
 }
 #line 115
-# 46 "/mnt/NodeC/src/NodeAC.nc"
-static inline void NodeAC__TimerProbe__fired(void )
+# 46 "/mnt/hgfs/WSS-Mini-Project/NodeC/src/NodeCC.nc"
+static inline void NodeCC__TimerProbe__fired(void )
 #line 46
 {
-  if (!NodeAC__busy) 
+  if (!NodeCC__busy) 
     {
 
-      NodeAProbeMsg *btrpkt = (NodeAProbeMsg *)NodeAC__Packet__getPayload(&NodeAC__pkt, sizeof(NodeAProbeMsg ));
+      NodeAProbeMsg *btrpkt = (NodeAProbeMsg *)NodeCC__Packet__getPayload(&NodeCC__pkt, sizeof(NodeAProbeMsg ));
 
 #line 51
       __nesc_hton_uint16(btrpkt->nodeid.data, TOS_NODE_ID);
@@ -16587,33 +16587,33 @@ static inline void NodeAC__TimerProbe__fired(void )
 
 
 
-      NodeAC__packAck__requestAck(&NodeAC__pkt);
-      if (NodeAC__ProbeSnd__send(NodeAC__dest, &NodeAC__pkt, sizeof(NodeAProbeMsg )) == SUCCESS) 
+      NodeCC__packAck__requestAck(&NodeCC__pkt);
+      if (NodeCC__ProbeSnd__send(NodeCC__dest, &NodeCC__pkt, sizeof(NodeAProbeMsg )) == SUCCESS) 
         {
-          NodeAC__Leds__led0Toggle();
-          NodeAC__busy = TRUE;
+          NodeCC__Leds__led0Toggle();
+          NodeCC__busy = TRUE;
         }
       else 
         {
-          NodeAC__Leds__led2Toggle();
+          NodeCC__Leds__led2Toggle();
         }
     }
 }
 
 #line 87
-static inline void NodeAC__TimerData__fired(void )
+static inline void NodeCC__TimerData__fired(void )
 #line 87
 {
 }
 
 
-static inline void NodeAC__TimeOutData__fired(void )
+static inline void NodeCC__TimeOutData__fired(void )
 #line 91
 {
 }
 
 
-static inline void NodeAC__TimeOutProbe__fired(void )
+static inline void NodeCC__TimeOutProbe__fired(void )
 #line 95
 {
 }
@@ -16630,25 +16630,25 @@ inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 #line 72
     case 0U:
 #line 72
-      NodeAC__TimerProbe__fired();
+      NodeCC__TimerProbe__fired();
 #line 72
       break;
 #line 72
     case 1U:
 #line 72
-      NodeAC__TimerData__fired();
+      NodeCC__TimerData__fired();
 #line 72
       break;
 #line 72
     case 2U:
 #line 72
-      NodeAC__TimeOutData__fired();
+      NodeCC__TimeOutData__fired();
 #line 72
       break;
 #line 72
     case 3U:
 #line 72
-      NodeAC__TimeOutProbe__fired();
+      NodeCC__TimeOutProbe__fired();
 #line 72
       break;
 #line 72
@@ -17202,17 +17202,17 @@ inline static error_t RealMainP__SoftwareInit__init(void ){
 #line 51
 }
 #line 51
-# 29 "/mnt/NodeC/src/NodeAC.nc"
-static inline void NodeAC__Boot__booted(void )
+# 29 "/mnt/hgfs/WSS-Mini-Project/NodeC/src/NodeCC.nc"
+static inline void NodeCC__Boot__booted(void )
 #line 29
 {
-  NodeAC__AMControl__start();
+  NodeCC__AMControl__start();
 }
 
 # 49 "/opt/tinyos-2.1.1/tos/interfaces/Boot.nc"
 inline static void RealMainP__Boot__booted(void ){
 #line 49
-  NodeAC__Boot__booted();
+  NodeCC__Boot__booted();
 #line 49
 }
 #line 49
@@ -19252,20 +19252,20 @@ static void SchedulerBasicP__TaskBasic__runTask(uint8_t arg_0x405a04a0){
 #line 64
 }
 #line 64
-# 76 "/mnt/NodeC/src/NodeAC.nc"
-static void NodeAC__ProbeSnd__sendDone(message_t *msg, error_t error)
+# 76 "/mnt/hgfs/WSS-Mini-Project/NodeC/src/NodeCC.nc"
+static void NodeCC__ProbeSnd__sendDone(message_t *msg, error_t error)
 #line 76
 {
-  NodeAC__TimeOutProbe__startOneShot(PROBE_TIMEOUT_MS);
-  if (NodeAC__packAck__wasAcked(&NodeAC__pkt)) 
+  NodeCC__TimeOutProbe__startOneShot(PROBE_TIMEOUT_MS);
+  if (NodeCC__packAck__wasAcked(&NodeCC__pkt)) 
     {
-      NodeAProbeMsg *btrpkt = (NodeAProbeMsg *)NodeAC__Packet__getPayload(&NodeAC__pkt, sizeof(NodeAProbeMsg ));
+      NodeAProbeMsg *btrpkt = (NodeAProbeMsg *)NodeCC__Packet__getPayload(&NodeCC__pkt, sizeof(NodeAProbeMsg ));
 
 #line 81
       __nesc_hton_uint16(btrpkt->nodeid.data, TOS_NODE_ID);
-      NodeAC__Leds__led1Toggle();
+      NodeCC__Leds__led1Toggle();
     }
-  NodeAC__busy = FALSE;
+  NodeCC__busy = FALSE;
 }
 
 # 133 "/opt/tinyos-2.1.1/tos/lib/timer/VirtualizeTimerC.nc"

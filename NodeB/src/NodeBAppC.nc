@@ -1,11 +1,11 @@
 #include <Timer.h>
-#include "NodeA.h"
-configuration NodeAAppC{
+#include "NodeB.h"
+configuration NodeBAppC{
 }
 implementation{
   components MainC;
   components LedsC;
-  components NodeAC as App;
+  components NodeBC as App;
   components new TimerMilliC() as Timer0;
   components new TimerMilliC() as Timer1;
   components new TimerMilliC() as Timer2;
@@ -13,6 +13,7 @@ implementation{
   components ActiveMessageC;
   components new AMSenderC(AM_PROBE_SND);
   components new AMReceiverC(AM_PROBE_SND);
+  components CC2420PacketC;
 
 
   App.Boot -> MainC;
@@ -27,4 +28,5 @@ implementation{
   App.AMControl -> ActiveMessageC;
   App.ProbeRcv -> AMReceiverC;
   App.packAck -> AMSenderC;
+  App.CC2420Packet -> CC2420PacketC;
   }

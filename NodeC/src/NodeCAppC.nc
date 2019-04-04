@@ -1,11 +1,11 @@
 #include <Timer.h>
-#include "NodeA.h"
-configuration NodeAAppC{
+#include "NodeC.h"
+configuration NodeCAppC{
 }
 implementation{
   components MainC;
   components LedsC;
-  components NodeAC as App;
+  components NodeCC as App;
   components new TimerMilliC() as Timer0;
   components new TimerMilliC() as Timer1;
   components new TimerMilliC() as Timer2;

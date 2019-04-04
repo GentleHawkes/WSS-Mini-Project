@@ -1,6 +1,6 @@
 #include <Timer.h>
-#include "NodeA.h"
-module NodeAC{
+#include "NodeC.h"
+module NodeCC{
   uses interface Boot;
   uses interface Leds;
   uses interface Timer<TMilli> as TimerProbe;
