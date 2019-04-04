@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 3 elements to &apos;src&apos;&#x0A;- Original project: &apos;NodeAComm&apos;&#x0A;- Destination element: &apos;src&apos;&#x0A;- Original elements:&#x0A;     NodeAAppC.nc&#x0A;     NodeA.h&#x0A;     NodeAC.nc" description="Copy files" element1="src/NodeAAppC.nc" element2="src/NodeA.h" element3="src/NodeAC.nc" files="3" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1554389231997" target="/NodeC/src" units="0" version="1.0"/>
+</session>

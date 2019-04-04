@@ -8,3 +8,6 @@ ActualNodeA/build/telosb/app.c
 ActualNodeA/build/telosb/tos_image.xml
 .metadata/.plugins/org.eclipse.core.resources/.projects/ActualNodeA/.indexes/e4/history.index
 ActualNodeA/.cache/*
+NodeAComm/.cache/*
+NodeAComm/build/telosb/app.c
+NodeAComm/build/telosb/tos_image.xml

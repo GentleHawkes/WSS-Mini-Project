@@ -16,6 +16,7 @@ module NodeAC{
   uses interface SplitControl as AMControl;
   
   uses interface CC2420Packet;
+  uses interface PacketAcknowledgements as packAck;
 }
 implementation{
   uint16_t BPropeCounter = 0;
@@ -23,12 +24,7 @@ implementation{
   bool busy = FALSE;
   message_t pkt;
   
-  uint8_t statRCounter = 0;
-  uint8_t statSCounter = 0;
-  static statTuple receivedStats[1000];
-  static statTuple sentStats[1000];
-  
-  int dest = NODE_C_ADDR; //Node C address
+  int dest = NODE_A_ADDR; //Node C address
   
   event void Boot.booted() {
     call AMControl.start();
@@ -50,9 +46,10 @@ implementation{
   event void TimerProbe.fired() {
     if(!busy)
     {
-    	NodeAProbeMsg* btrpkt = (NodeAProbeMsg*)(call Packet.getPayload(&pkt, sizeof (NodeAProbeMsg)));
-    	btrpkt->nodeid = TOS_NODE_ID;
     	
+    	NodeAProbeMsg *btrpkt = (NodeAProbeMsg*)(call Packet.getPayload(&pkt, sizeof (NodeAProbeMsg)));
+    	btrpkt->nodeid = TOS_NODE_ID;
+    	/*
     	if(dest == 2){
     		dest = NODE_C_ADDR;
     		btrpkt->SeqCounter = CPropeCounter++;
@@ -61,15 +58,30 @@ implementation{
     		dest = NODE_B_ADDR;
     		btrpkt->SeqCounter = BPropeCounter++;
     	}
-    	
-    	call ProbeSnd.send(dest, &pkt, sizeof (NodeAProbeMsg));
+    	*/
+    	call packAck.requestAck(&pkt);
+    	if(call ProbeSnd.send(dest, &pkt, sizeof (NodeAProbeMsg)) == SUCCESS)
+    	{
+    	call Leds.led0Toggle();
     	busy = TRUE;
+    	}
+    	else
+    	{
+    		call Leds.led2Toggle();
+    	}
+    		
     }
   }
    
   event void ProbeSnd.sendDone(message_t* msg, error_t error) {
     call TimeOutProbe.startOneShot(PROBE_TIMEOUT_MS);
-    call Leds.led0Toggle();
+    if(call packAck.wasAcked(&pkt))
+    {
+    	NodeAProbeMsg* btrpkt = (NodeAProbeMsg*)(call Packet.getPayload(&pkt, sizeof (NodeAProbeMsg)));
+    	btrpkt->nodeid = TOS_NODE_ID;
+    	call Leds.led1Toggle();	
+    }
+    busy = FALSE;
   }
 
 	event void TimerData.fired(){
@@ -86,17 +98,17 @@ implementation{
 
 	event message_t * ProbeRcv.receive(message_t *msg, void *payload, uint8_t len){
 		// TODO Auto-generated method stub
+		call Leds.led2Toggle();
 		return msg;
 	}
 
 	event void DataSnd.sendDone(message_t *msg, error_t error){
-		sentStats[statSCounter++].rssi = call CC2420Packet.getRssi(msg);
-		sentStats[statSCounter++].lqi = call CC2420Packet.getLqi(msg);
+		// TODO Auto-generated method stub
 	}
 
 	event message_t * DataRcv.receive(message_t *msg, void *payload, uint8_t len){
-		receivedStats[statRCounter++].rssi = call CC2420Packet.getRssi(msg);
-		receivedStats[statRCounter++].lqi = call CC2420Packet.getLqi(msg);
+		// TODO Auto-generated method stub
+		
 		return msg;
 	}
 }
