@@ -12,3 +12,9 @@ ActualNodeA/.cache/*
 NodeB/build/telosb/app.c
 NodeB/build/telosb/tos_image.xml
 NodeC/build/telosb/app.c
+NodeA/build/telosb/main.ihex.out
+.metadata/.plugins/org.eclipse.core.resources/.root/.markers.snap
+.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
+.metadata/.plugins/org.eclipse.core.resources/.snap
+NodeA/build/telosb/ident_flags.txt
+NodeA/build/telosb/tos_image.xml
