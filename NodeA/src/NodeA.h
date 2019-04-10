@@ -1,15 +1,13 @@
 #ifndef NODE_A_H
 #define NODE_A_H
 enum {
-   AM_PROBE_SND = 6,
-   AM_PROBE_ACK = 12,
-   TIMER_PERIOD_MILLI = 250,
-   SEND_PROBE_INTER_MS = 1000,
-   SEND_DATA_INTER_MS = 2000,
-   DATA_TIMEOUT_MS = 1000,
-   PROBE_TIMEOUT_MS = 750
-   
- };
+	AM_PROBE_SND = 6,
+	AM_PROBE_ACK = 12,
+	AM_DATA_SND = 7,
+	
+	SEND_PROBE_INTER_MS = 5000,
+	SEND_DATA_INTER_MS = 1000
+};
 
 enum {
 	NODE_A_ADDR = 1,
@@ -18,12 +16,11 @@ enum {
 };
 
 typedef nx_struct NodeAProbeMsg {
-  nx_uint16_t nodeid;
-  nx_uint16_t SeqCounter;
+	nx_uint16_t SeqCounter;
 } NodeAProbeMsg;
 
-typedef nx_struct NodeADataMsg{
-  
+typedef nx_struct {
+	nx_uint64_t lo, hi; 
 } NodeADataMsg;
 
 typedef struct {
