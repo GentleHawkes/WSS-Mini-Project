@@ -3,28 +3,25 @@
 module NodeBC{
   uses interface Boot;
   uses interface Leds;
-  uses interface Timer<TMilli> as TimerProbe;
+  //uses interface Timer<TMilli> as TimerProbe;
   uses interface Timer<TMilli> as TimerData;
-  uses interface Timer<TMilli> as TimeOutData;
-  uses interface Timer<TMilli> as TimeOutProbe;
+  uses interface Timer<TMilli> as TimeOutLED1;
+  uses interface Timer<TMilli> as TimeOutLED2;
   uses interface Packet;
-  uses interface AMPacket;
+  uses interface AMPacket as AMPack;
   uses interface AMSend as ProbeSnd;
   uses interface Receive as ProbeRcv;
   uses interface AMSend as DataSnd;
   uses interface Receive as DataRcv;
   uses interface SplitControl as AMControl;
-  
-  uses interface CC2420Packet;
+  uses interface CC2420Packet as radioPack;
   uses interface PacketAcknowledgements as packAck;
 }
 implementation{
-  uint16_t BPropeCounter = 0;
-  uint16_t CPropeCounter = 0;
   bool busy = FALSE;
   message_t pkt;
   
-  int dest = NODE_A_ADDR; //Node C address
+  int dest = NODE_C_ADDR; //Node C address
   
   event void Boot.booted() {
     call AMControl.start();
@@ -32,7 +29,7 @@ implementation{
   
   event void AMControl.startDone(error_t err){
   	if(err == SUCCESS) {
-  		call TimerProbe.startPeriodic(TIMER_PERIOD_MILLI);
+  		call TimerData.startPeriodic(TIMER_PERIOD_MILLI);
   		}
   		else
   		{
@@ -43,7 +40,7 @@ implementation{
   event void AMControl.stopDone(error_t err){
   	}
   
-  event void TimerProbe.fired() {
+  /*event void TimerProbe.fired() {
     if(!busy)
     {
     	
@@ -58,7 +55,7 @@ implementation{
     		dest = NODE_B_ADDR;
     		btrpkt->SeqCounter = BPropeCounter++;
     	}
-    	*/
+    	
     	call packAck.requestAck(&pkt);
     	if(call ProbeSnd.send(dest, &pkt, sizeof (NodeAProbeMsg)) == SUCCESS)
     	{
@@ -72,42 +69,56 @@ implementation{
     		
     }
   }
+  	*/
    
   event void ProbeSnd.sendDone(message_t* msg, error_t error) {
-    call TimeOutProbe.startOneShot(PROBE_TIMEOUT_MS);
-    if(call packAck.wasAcked(&pkt))
-    {
-    	NodeAProbeMsg* btrpkt = (NodeAProbeMsg*)(call Packet.getPayload(&pkt, sizeof (NodeAProbeMsg)));
-    	btrpkt->nodeid = TOS_NODE_ID;
-    	call Leds.led1Toggle();	
-    }
-    busy = FALSE;
+    
   }
 
 	event void TimerData.fired(){
 		// TODO Auto-generated method stub
 	}
 
-	event void TimeOutData.fired(){
+	event void TimeOutLED1.fired(){
 		// TODO Auto-generated method stub
+		call Leds.led1Off();
 	}
 
-	event void TimeOutProbe.fired(){
+	event void TimeOutLED2.fired(){
 		// TODO Auto-generated method stub
+		call Leds.led2Off();
 	}
 
 	event message_t * ProbeRcv.receive(message_t *msg, void *payload, uint8_t len){
 		// TODO Auto-generated method stub
-		call Leds.led2Toggle();
+		
 		return msg;
 	}
 
 	event void DataSnd.sendDone(message_t *msg, error_t error){
 		// TODO Auto-generated method stub
+		
+    if(call packAck.wasAcked(msg))
+    {
+    	call Leds.led1On();	
+    	call TimeOutLED1.startOneShot(LED_TIMEOUT_MS);
+    }
+    busy = FALSE;
 	}
 
 	event message_t * DataRcv.receive(message_t *msg, void *payload, uint8_t len){
 		// TODO Auto-generated method stub
+			call Leds.led0Toggle();
+			call radioPack.setPower(msg,TRANSMITTING_POWER);
+			call packAck.requestAck(msg);
+			if(call DataSnd.send(dest, msg, sizeof (NodeAProbeMsg)) == SUCCESS)
+    		{
+    			call Leds.led2On();
+    			call TimeOutLED2.startOneShot(LED_TIMEOUT_MS);
+    			busy = TRUE;
+			}
+		
+		
 		
 		return msg;
 	}
