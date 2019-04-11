@@ -1,0 +1,57 @@
+Thread[Thread-1,5,main]LQI: 62
+RSSI: -46
+
+LQI: 72
+RSSI: -46
+
+LQI: 76
+RSSI: -46
+
+LQI: 86
+RSSI: -47
+
+LQI: 64
+RSSI: -46
+
+LQI: 71
+RSSI: -47
+
+LQI: 104
+RSSI: -40
+
+LQI: 105
+RSSI: -40
+
+LQI: 105
+RSSI: -40
+
+LQI: 105
+RSSI: -40
+
+LQI: 103
+RSSI: -40
+
+LQI: 86
+RSSI: -47
+
+LQI: 85
+RSSI: -45
+
+LQI: 86
+RSSI: -46
+
+LQI: 75
+RSSI: -45
+
+LQI: 57
+RSSI: -44
+
+LQI: 70
+RSSI: -46
+
+LQI: 86
+RSSI: -41
+
+LQI: 82
+RSSI: -47
+
