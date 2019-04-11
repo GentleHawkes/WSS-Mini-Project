@@ -1,5 +1,7 @@
 #include <Timer.h>
 #include "../../NodeA/src/Nodes.h"
+#include "printf.h"
+
 module NodeAC{
 	uses interface Boot;
 	uses interface Leds;
@@ -71,6 +73,9 @@ implementation {
 		if (call packAck.wasAcked(msg)) {
 			sentStats[statSCounter++].rssi = call CC2420Packet.getRssi(msg);
 			sentStats[statSCounter++].lqi = call CC2420Packet.getLqi(msg);
+			printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg));
+			printfflush();
+			
 		}
 		busy = FALSE;
 	}
@@ -85,6 +90,7 @@ implementation {
 			if(call DataSnd.send(dest, &pkt, sizeof (NodeADataMsg)) == SUCCESS)
 			{
 				call Leds.led2Toggle();
+				
 			}
 			else
 			{

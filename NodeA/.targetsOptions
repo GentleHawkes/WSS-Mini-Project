@@ -9,7 +9,9 @@
 <parameter ask="false" name="Mote Id">691</parameter>
 </extra>
 </make-extras>
-<includes/>
+<includes>
+<include global="false" include="source" ncc="true" recursive="false">/opt/tinyos-2.1.1/tos/lib/printf</include>
+</includes>
 <excludes>
 <exclude>.*\.svn.*</exclude>
 </excludes>
