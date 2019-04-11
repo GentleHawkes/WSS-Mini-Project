@@ -1,5 +1,5 @@
 #include <Timer.h>
-#include "NodeC.h"
+#include "../../NodeA/src/Nodes.h"
 module NodeCC{
   uses interface Boot;
   uses interface Leds;

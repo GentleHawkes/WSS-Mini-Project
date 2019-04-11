@@ -1,15 +1,3 @@
-<tos_image>
-  <ident>
-    <uidhash>0E55239AL</uidhash>
-    <hostname>ubuntu</hostname>
-    <username>tinyos</username>
-    <appname>/mnt/NodeA/src/</appname>
-    <userhash>29AC8746L</userhash>
-    <timestamp>5CAF2F4FL</timestamp>
-    <deluge_support>no</deluge_support>
-    <platform>telosb</platform>
-  </ident>
-  <image format="ihex">
 :10400000B240805A20013F4066703E4000113D4062
 :1040100028110D9E0524FE4F00001E530E9DFB2B04
 :104020003F4028113D40FB210D9F0524CF43000058
@@ -792,5 +780,3 @@
 :10FFF000925EFC5D3A403A40B04BFA403A400040D5
 :0400000300004000B9
 :00000001FF
-  </image>
-</tos_image>

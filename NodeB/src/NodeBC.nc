@@ -1,5 +1,5 @@
 #include <Timer.h>
-#include "NodeB.h"
+#include "../../NodeA/src/Nodes.h"
 module NodeBC{
   uses interface Boot;
   uses interface Leds;
@@ -109,7 +109,7 @@ implementation{
 	event message_t * DataRcv.receive(message_t *msg, void *payload, uint8_t len){
 		// TODO Auto-generated method stub
 			call Leds.led0Toggle();
-			call radioPack.setPower(msg,TRANSMITTING_POWER);
+			call radioPack.setPower(msg, TRANSMITTING_POWER);
 			call packAck.requestAck(msg);
 			if(call DataSnd.send(dest, msg, sizeof (NodeAProbeMsg)) == SUCCESS)
     		{

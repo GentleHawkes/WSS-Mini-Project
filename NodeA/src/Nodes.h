@@ -5,9 +5,23 @@ enum {
 	AM_PROBE_ACK = 12,
 	AM_DATA_SND = 7,
 	
+	//For NodeC.h
+	AM_PROBE_RCV = 6,
+   	AM_DATA_RCV = 7,
+	
 	SEND_PROBE_INTER_MS = 5000,
-	SEND_DATA_INTER_MS = 1000
+	SEND_DATA_INTER_MS = 1000,
+	
+	//For NodeB.h
+	AM_PROBE = 6,
+   	AM_DATA = 7,
+   	TIMER_PERIOD_MILLI = 250,
+   	DATA_TIMEOUT_MS = 100,
+   	PROBE_TIMEOUT_MS = 750,
+   	LED_TIMEOUT_MS = 100,
+   	TRANSMITTING_POWER = 1
 };
+
 
 enum {
 	NODE_A_ADDR = 691,

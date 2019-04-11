@@ -3,6 +3,8 @@
 	<name>NodeB</name>
 	<comment></comment>
 	<projects>
+		<project>NodeA</project>
+		<project>NodeC</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

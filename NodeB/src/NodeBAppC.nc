@@ -1,5 +1,5 @@
 #include <Timer.h>
-#include "NodeB.h"
+#include "../../NodeA/src/Nodes.h"
 configuration NodeBAppC{
 }
 implementation{

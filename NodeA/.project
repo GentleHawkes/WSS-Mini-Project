@@ -3,6 +3,8 @@
 	<name>NodeA</name>
 	<comment></comment>
 	<projects>
+		<project>NodeB</project>
+		<project>NodeC</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -14,4 +16,10 @@
 	<natures>
 		<nature>tinyos.yeti.core.TinyOSProject</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>NodeH</name>
+			<value>file:/mnt/NodeA/src/NodeA.h</value>
+		</variable>
+	</variableList>
 </projectDescription>

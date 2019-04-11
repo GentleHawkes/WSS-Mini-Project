@@ -1,5 +1,5 @@
 #include <Timer.h>
-#include "NodeA.h"
+#include "Nodes.h"
 configuration NodeAAppC{
 }
 implementation{
