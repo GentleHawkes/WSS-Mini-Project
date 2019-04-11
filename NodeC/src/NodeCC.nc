@@ -39,16 +39,20 @@ implementation{
 
 	event message_t * ProbeRcv.receive(message_t *msg, void *payload, uint8_t len){
 		// TODO Auto-generated method stub
-		if(len == sizeof(NodeProbeMsg)){call Leds.led1Toggle();
-		NodeProbeMsg *prbptr = (NodeProbeMsg*)payload;
-		prbptr->SeqCounter++;}
+		if(len == sizeof(NodeProbeMsg)){
+			call Leds.led1Toggle();
+		NodeProbeMsg* prbptr = (NodeProbeMsg*)payload;
+		//prbptr->SeqCounter++;
+		}
 		return msg;
 	}
 
 	event message_t * DataRcv.receive(message_t *msg, void *payload, uint8_t len){
 		// TODO Auto-generated method stub
-		if(len == sizeof(NodeDataMsg)){call Leds.led2Toggle();
-		NodeDataMsg *dtaptr = (NodeDataMsg*)payload;}
+		if(len == sizeof(NodeDataMsg)){
+			call Leds.led2Toggle();
+		NodeDataMsg *dtaptr = (NodeDataMsg*)payload;
+		}
 		return msg;
 	}
 }
