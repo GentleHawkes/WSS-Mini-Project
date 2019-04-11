@@ -9,11 +9,11 @@ implementation{
   components new TimerMilliC() as Timer0;
   components new TimerMilliC() as Timer1;
   components ActiveMessageC;
-  components new AMSenderC(AM_PROBE_SND);
-  components new AMReceiverC(AM_PROBE_SND);
+  components new AMSenderC(AM_PROBE);
+  components new AMReceiverC(AM_PROBE);
   components CC2420PacketC;
-  components new AMSenderC(AM_DATA_SND) as DataSnd;
-  components new AMReceiverC(AM_DATA_SND) as DataRcv;
+  components new AMSenderC(AM_DATA) as DataSnd;
+  components new AMReceiverC(AM_DATA) as DataRcv;
 
   App.Boot -> MainC;
   App.Leds -> LedsC;

@@ -7,8 +7,8 @@ implementation{
   components LedsC;
   components NodeCC as App;
   components ActiveMessageC;
-  components new AMReceiverC(AM_PROBE_RCV) as AMReceiverProbe;
-  components new AMReceiverC(AM_DATA_RCV) as AMReceiverData;
+  components new AMReceiverC(AM_PROBE) as AMReceiverProbe;
+  components new AMReceiverC(AM_DATA) as AMReceiverData;
   
   App.Boot -> MainC;
   App.Leds -> LedsC;
