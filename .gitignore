@@ -18,3 +18,4 @@ NodeA/build/telosb/main.ihex.out
 .metadata/.plugins/org.eclipse.core.resources/.snap
 NodeA/build/telosb/ident_flags.txt
 NodeA/build/telosb/tos_image.xml
+*.snap
