@@ -29,8 +29,6 @@ implementation {
 	uint16_t lqiCalculationCounter = 0; 
 	static statTuple receivedStats[1000];
 	static statTuple sentStats[1000];
-	uint8_t LQI_B = 0;
-	uint8_t LQI_C = 0;
  
 	int dest = NODE_B_ADDR;
  
@@ -41,7 +39,7 @@ implementation {
 	event void AMControl.startDone(error_t err){
 		if(err == SUCCESS) {
 			call TimerProbe.startPeriodic(SEND_PROBE_INTER_MS);
-			
+			call TimerData.startPeriodic(SEND_DATA_INTER_MS);
 		}
 		else
 		{
@@ -58,57 +56,26 @@ implementation {
 			btrpkt->SeqCounter = probeCounter++;
 			call CC2420Packet.setPower(&pkt, 1);
 			call packAck.requestAck(&pkt);
-			dest = NODE_B_ADDR;
 			if(call ProbeSnd.send(dest, &pkt, sizeof (NodeAProbeMsg)) == SUCCESS)
 			{
-				
 				call Leds.led0Toggle();
 			}
 			else
 			{
 				call Leds.led1Toggle();
 			}
-			 
-			
-			 
 			busy = TRUE;
-			call TimerData.startPeriodic(SEND_DATA_INTER_MS);
 		}
 	}
  
 	event void ProbeSnd.sendDone(message_t* msg, error_t error) {
  
 		if (call packAck.wasAcked(msg)) {
-			
-			if(call AMPacket.destination(msg) == NODE_B_ADDR)
-			{
-			LQI_B = call CC2420Packet.getLqi(msg);
-			printf("LQI for B: %u\n", call CC2420Packet.getLqi(msg));
-			dest = NODE_C_ADDR;
-			
-			if(call ProbeSnd.send(dest, &pkt, sizeof (NodeAProbeMsg)) == SUCCESS)
-			{
-				call Leds.led0Toggle();
-			}
-			}
-			
-			else if(call AMPacket.destination(msg) == NODE_C_ADDR)
-			{
-			LQI_C = call CC2420Packet.getLqi(msg);
-			printf("LQI for C: %u\n\n", call CC2420Packet.getLqi(msg));
-			}
-			
-			/*
 			sentStats[statSCounter++].rssi = call CC2420Packet.getRssi(msg);
 			sentStats[statSCounter++].lqi = call CC2420Packet.getLqi(msg);
-			*/
-			//printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg));
+			printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg));
 			printfflush();
 			
-		}
-		else
-		{
-			// Wait and poll
 		}
 		busy = FALSE;
 	}
@@ -120,15 +87,6 @@ implementation {
 			dataMsg->hi = 12;
 			call CC2420Packet.setPower(&pkt, 1);
 			call packAck.requestAck(&pkt);
-			if(LQI_B <= LQI_C)
-			{
-				dest = NODE_C_ADDR;
-			}
-			else
-			{
-				dest = NODE_B_ADDR;
-			}
-			
 			if(call DataSnd.send(dest, &pkt, sizeof (NodeADataMsg)) == SUCCESS)
 			{
 				call Leds.led2Toggle();
@@ -155,19 +113,7 @@ implementation {
 			call Leds.led1Toggle();
 			sentStats[statSCounter++].rssi = call CC2420Packet.getRssi(msg);
 			sentStats[statSCounter++].lqi = call CC2420Packet.getLqi(msg);
-			
-			if(call AMPacket.destination(msg) == NODE_B_ADDR)
-			{
-			printf("Sent to node B\n");
-			}
-			
-			else if(call AMPacket.destination(msg) == NODE_C_ADDR)
-			{
-			printf("Sent to node C\n");
-			}
-			printfflush();
 		}
-		
 		busy = FALSE;
 	}
 

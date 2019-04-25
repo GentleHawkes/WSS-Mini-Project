@@ -1,7 +1,7 @@
 #ifndef NODE_A_H
 #define NODE_A_H
 enum {
-	SEND_PROBE_INTER_MS = 5000,
+	SEND_PROBE_INTER_MS = 2000,
 	SEND_DATA_INTER_MS = 1050,
 	
 	TIMER_PERIOD_MILLI = 250,
@@ -17,9 +17,9 @@ enum {
 
 
 enum {
-	NODE_A_ADDR = 691,
-	NODE_B_ADDR = 692,
-	NODE_C_ADDR = 693
+	NODE_A_ADDR = 690,
+	NODE_B_ADDR = 691,
+	NODE_C_ADDR = 692
 };
 
 typedef nx_struct NodeAProbeMsg {
