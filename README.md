@@ -9,3 +9,7 @@ In order to write the LQI values to a file execute the following command:
 
 #### Use Printf in the project
   java net.tinyos.tools.PrintfClient -comm serial@/dev/ttyUSB0:telosb
+  
+##### Mounting the folder on your VM
+*Note that sharename might be different for you
+mount -t vboxsf WSS-Mini-Project /mnt/
