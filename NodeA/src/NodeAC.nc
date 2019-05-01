@@ -111,8 +111,6 @@ implementation {
  
 		if (call packAck.wasAcked(msg)) {
 			call Leds.led1Toggle();
-			sentStats[statSCounter++].rssi = call CC2420Packet.getRssi(msg);
-			sentStats[statSCounter++].lqi = call CC2420Packet.getLqi(msg);
 		}
 		busy = FALSE;
 	}
