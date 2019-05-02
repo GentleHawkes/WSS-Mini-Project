@@ -71,9 +71,9 @@ implementation {
 	event void ProbeSnd.sendDone(message_t* msg, error_t error) {
  
 		if (call packAck.wasAcked(msg)) {
-			sentStats[statSCounter++].rssi = call CC2420Packet.getRssi(msg);
+			sentStats[statSCounter++].rssi = call CC2420Packet.getRssi(msg) - 45;
 			sentStats[statSCounter++].lqi = call CC2420Packet.getLqi(msg);
-			printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg));
+			printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg) - 45);
 			printfflush();
 			
 		}
@@ -102,7 +102,7 @@ implementation {
 	}
 
 	event message_t * ProbeRcv.receive(message_t *msg, void *payload, uint8_t len){
-		receivedStats[statRCounter++].rssi = call CC2420Packet.getRssi(msg);
+		receivedStats[statRCounter++].rssi = call CC2420Packet.getRssi(msg) - 45;
 		receivedStats[statRCounter++].lqi = call CC2420Packet.getLqi(msg);
 		return msg;
 	}
