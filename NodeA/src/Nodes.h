@@ -31,7 +31,7 @@ typedef nx_struct {
 } NodeADataMsg;
 
 typedef struct {
-	uint8_t rssi;
+	int8_t rssi;
 	uint8_t lqi;
 } statTuple;
 

@@ -45,7 +45,9 @@ implementation {
  			sumRssi += sentStats[startI].rssi;
  			
  		}
- 		return sumLqi/10 *(sumRssi/10 + 100/60);
+ 		printf("Mean_RSSI: %d\nmeanLQI_C: %d\n\n", sumRssi/10,sumLqi/10);
+				printfflush();
+ 		return (sumLqi/10)/100 *((sumRssi/10)/60 + 100/60);
  	}
  	
 	event void Boot.booted() {
@@ -93,10 +95,11 @@ implementation {
 		if (call packAck.wasAcked(msg)) {
 			sentStats[statSCounter].rssi = call CC2420Packet.getRssi(msg) - 45;
 			sentStats[statSCounter++].lqi = call CC2420Packet.getLqi(msg);
-			printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg) - 45);
-			printfflush();
+			//printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg) - 45);
+			//printfflush();
 		} else {
 			sentStats[statSCounter].rssi = -92;
+			sentStats[statSCounter++].lqi = 66;
 		}
 		if (probeCounter == 20) {
 				probeCounter = 0;
@@ -106,6 +109,7 @@ implementation {
 				LQE_C = calcLQE(10, 20);
 				printf("LQE_B: %d\nLQE_C: %d\n\n", LQE_B,LQE_C);
 				printfflush();
+				statSCounter=0;
 				//call TimerData.startPeriodic(SEND_DATA_INTER_MS);
 				
 		}
