@@ -28,11 +28,26 @@ implementation {
 	uint8_t statRCounter = 0;
 	uint8_t statSCounter = 0;
 	uint16_t lqiCalculationCounter = 0; 
-	static statTuple receivedStats[100];
-	static statTuple sentStats[100];
+	static statTuple receivedStats[40];
+	static statTuple sentStats[40];
+	
+	int LQE_B=0;
+	int LQE_C=0;
+	
  
 	int dest = NODE_B_ADDR;
  
+ 	int calcLQE(int startI, int endI) {
+ 		int sumLqi;
+ 		int sumRssi;
+ 		for (startI; startI < endI; startI++) {
+ 			sumLqi += sentStats[startI].lqi;
+ 			sumRssi += sentStats[startI].rssi;
+ 			
+ 		}
+ 		return sumLqi/10 *(sumRssi/10 + 100/60);
+ 	}
+ 	
 	event void Boot.booted() {
 		call AMControl.start();
 	}
@@ -40,7 +55,6 @@ implementation {
 	event void AMControl.startDone(error_t err){
 		if(err == SUCCESS) {
 			call TimerProbe.startPeriodic(SEND_PROBE_INTER_MS);
-			call TimerData.startPeriodic(SEND_DATA_INTER_MS);
 		}
 		else
 		{
@@ -54,6 +68,11 @@ implementation {
 		if (!busy)
 		{
 			NodeAProbeMsg* btrpkt = (NodeAProbeMsg*)(call Packet.getPayload(&pkt, sizeof (NodeAProbeMsg)));
+			if (probeCounter == 10) {
+				dest = NODE_C_ADDR;
+			} else if(probeCounter == 0) {
+				dest = NODE_B_ADDR;
+			}
 			btrpkt->SeqCounter = probeCounter++;
 			call CC2420Packet.setPower(&pkt, 1);
 			call packAck.requestAck(&pkt);
@@ -62,7 +81,7 @@ implementation {
 				call Leds.led0Toggle();
 			}
 			else
-			{
+			{		
 				call Leds.led1Toggle();
 			}
 			busy = TRUE;
@@ -76,8 +95,22 @@ implementation {
 			sentStats[statSCounter++].lqi = call CC2420Packet.getLqi(msg);
 			printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg) - 45);
 			printfflush();
-			
+		} else {
+			sentStats[statSCounter].rssi = -92;
 		}
+		if (probeCounter == 20) {
+				probeCounter = 0;
+				//call TimerProbe.stop();
+	
+				LQE_B = calcLQE(0, 10);
+				LQE_C = calcLQE(10, 20);
+				printf("LQE_B: %d\nLQE_C: %d\n\n", LQE_B,LQE_C);
+				printfflush();
+				//call TimerData.startPeriodic(SEND_DATA_INTER_MS);
+				
+		}
+		
+		
 		busy = FALSE;
 	}
 
