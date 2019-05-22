@@ -37,17 +37,18 @@ implementation {
  
 	int dest = NODE_B_ADDR;
  
- 	int calcLQE(int startI, int endI) {
- 		int sumLqi;
- 		int sumRssi;
- 		for (startI; startI < endI; startI++) {
+ 	float calcLQE(int startI, int endI) {
+ 		float sumLqi = 0;
+ 		float sumRssi = 0;
+ 		float constant = 1.66;
+ 		for (; startI < endI; startI++) {
  			sumLqi += sentStats[startI].lqi;
  			sumRssi += sentStats[startI].rssi;
  			
  		}
- 		printf("Mean_RSSI: %d\nmeanLQI_C: %d\n\n", sumRssi/10,sumLqi/10);
+ 		printf("Mean_RSSI: %f\nmeanLQI_C: %f\n\n", sumRssi/10,sumLqi/10);
 				printfflush();
- 		return (sumLqi/10)/100 *((sumRssi/10)/60 + 100/60);
+ 		return (sumLqi/10) *((sumRssi/10)/60 + constant);
  	}
  	
 	event void Boot.booted() {
@@ -105,8 +106,8 @@ implementation {
 				probeCounter = 0;
 				//call TimerProbe.stop();
 	
-				LQE_B = calcLQE(0, 10);
-				LQE_C = calcLQE(10, 20);
+				LQE_B = (int)calcLQE(0, 10);
+				LQE_C = (int)calcLQE(10, 20);
 				printf("LQE_B: %d\nLQE_C: %d\n\n", LQE_B,LQE_C);
 				printfflush();
 				statSCounter=0;
