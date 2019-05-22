@@ -33,7 +33,7 @@ implementation {
 	
 	int LQE_B = 0;	int LQE_C = 0;
 	
-	int dest = NODE_B_ADDR;
+	int dest = NODE_C_ADDR;
  
  	double calcLQE(int startI, int endI) {
  		double sumLqi = 0;
@@ -50,7 +50,15 @@ implementation {
  	}
  	
  	void setDestination() {
- 		dest = LQE_B - LQE_C > 30 ? LQE_B : LQE_C;
+ 		dest = LQE_B - LQE_C > 30 ? NODE_B_ADDR : NODE_C_ADDR;
+ 			if (LQE_B - LQE_C >= 30 && LQE_B != 0) {
+ 				dest = NODE_B_ADDR;
+ 			} else if (LQE_B - LQE_C < 30 && LQE_C != 0){
+ 				dest = LQE_C;
+ 			} else {
+ 				
+ 			}
+ 		
  		printf("Currend destination: %s\n\n", dest == NODE_B_ADDR ? "Node B" : "Node C");
  		printfflush();
  	}
@@ -73,9 +81,9 @@ implementation {
 		if (!busy) {
 			NodeAProbeMsg* btrpkt = (NodeAProbeMsg*)(call Packet.getPayload(&pkt, sizeof (NodeAProbeMsg)));
 			if (probeCounter == 10) {
-				dest = NODE_C_ADDR;
-			} else if(probeCounter == 0) {
 				dest = NODE_B_ADDR;
+			} else if(probeCounter == 0) {
+				dest = NODE_C_ADDR;
 			}
 			btrpkt->SeqCounter = probeCounter++;
 			call CC2420Packet.setPower(&pkt, 1);
@@ -93,8 +101,8 @@ implementation {
 		if (call packAck.wasAcked(msg)) {
 			sentStats[statSCounter].rssi = call CC2420Packet.getRssi(msg) - 45;
 			sentStats[statSCounter++].lqi = call CC2420Packet.getLqi(msg);
-			//printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg) - 45);
-			//printfflush();
+			printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg));
+			printfflush();
 		} else {
 			sentStats[statSCounter].rssi = -100;
 			sentStats[statSCounter++].lqi = 66;
