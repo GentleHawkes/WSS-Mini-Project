@@ -1,6 +1,7 @@
 #include <Timer.h>
 #include "../../NodeA/src/Nodes.h"
 #include "printf.h"
+#include "math.h"
 
 module NodeAC{
 	uses interface Boot;
@@ -22,25 +23,22 @@ implementation {
 	bool busy = FALSE;
 	message_t pkt;
  
-	uint8_t probeCounter;
-	uint8_t packetCounter;
- 
-	uint8_t statRCounter = 0;
+	uint8_t probeCounter = 0;
+	uint8_t dataPacketCounter = 0;
+
 	uint8_t statSCounter = 0;
-	uint16_t lqiCalculationCounter = 0; 
-	static statTuple receivedStats[40];
-	static statTuple sentStats[40];
 	
-	int LQE_B=0;
-	int LQE_C=0;
+	static statTuple receivedStats[20];
+	static statTuple sentStats[20];
 	
- 
+	int LQE_B = 0;	int LQE_C = 0;
+	
 	int dest = NODE_B_ADDR;
  
- 	float calcLQE(int startI, int endI) {
- 		float sumLqi = 0;
- 		float sumRssi = 0;
- 		float constant = 1.66;
+ 	double calcLQE(int startI, int endI) {
+ 		double sumLqi = 0;
+ 		double sumRssi = 0;
+ 		double constant = 1.66;
  		for (; startI < endI; startI++) {
  			sumLqi += sentStats[startI].lqi;
  			sumRssi += sentStats[startI].rssi;
@@ -51,16 +49,20 @@ implementation {
  		return (sumLqi/10) *((sumRssi/10)/60 + constant);
  	}
  	
+ 	void setDestination() {
+ 		dest = LQE_B - LQE_C > 30 ? LQE_B : LQE_C;
+ 		printf("Currend destination: %s\n\n", dest == NODE_B_ADDR ? "Node B" : "Node C");
+ 		printfflush();
+ 	}
+ 	
 	event void Boot.booted() {
 		call AMControl.start();
 	}
  
 	event void AMControl.startDone(error_t err){
-		if(err == SUCCESS) {
+		if (err == SUCCESS) {
 			call TimerProbe.startPeriodic(SEND_PROBE_INTER_MS);
-		}
-		else
-		{
+		} else {
 			call AMControl.start();
 		}
 	}
@@ -68,8 +70,7 @@ implementation {
 	event void AMControl.stopDone(error_t err) {}
  
 	event void TimerProbe.fired() {
-		if (!busy)
-		{
+		if (!busy) {
 			NodeAProbeMsg* btrpkt = (NodeAProbeMsg*)(call Packet.getPayload(&pkt, sizeof (NodeAProbeMsg)));
 			if (probeCounter == 10) {
 				dest = NODE_C_ADDR;
@@ -79,43 +80,36 @@ implementation {
 			btrpkt->SeqCounter = probeCounter++;
 			call CC2420Packet.setPower(&pkt, 1);
 			call packAck.requestAck(&pkt);
-			if(call ProbeSnd.send(dest, &pkt, sizeof (NodeAProbeMsg)) == SUCCESS)
-			{
+			if(call ProbeSnd.send(dest, &pkt, sizeof (NodeAProbeMsg)) == SUCCESS) {
 				call Leds.led0Toggle();
-			}
-			else
-			{		
+			} else {		
 				call Leds.led1Toggle();
 			}
 			busy = TRUE;
 		}
 	}
  
-	event void ProbeSnd.sendDone(message_t* msg, error_t error) {
- 
+	event void ProbeSnd.sendDone(message_t* msg, error_t error) { 
 		if (call packAck.wasAcked(msg)) {
 			sentStats[statSCounter].rssi = call CC2420Packet.getRssi(msg) - 45;
 			sentStats[statSCounter++].lqi = call CC2420Packet.getLqi(msg);
 			//printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg) - 45);
 			//printfflush();
 		} else {
-			sentStats[statSCounter].rssi = -92;
+			sentStats[statSCounter].rssi = -100;
 			sentStats[statSCounter++].lqi = 66;
 		}
 		if (probeCounter == 20) {
 				probeCounter = 0;
-				//call TimerProbe.stop();
-	
+				call TimerProbe.stop();
 				LQE_B = (int)calcLQE(0, 10);
 				LQE_C = (int)calcLQE(10, 20);
 				printf("LQE_B: %d\nLQE_C: %d\n\n", LQE_B,LQE_C);
 				printfflush();
 				statSCounter=0;
-				//call TimerData.startPeriodic(SEND_DATA_INTER_MS);
-				
+				setDestination();
+				call TimerData.startPeriodic(SEND_DATA_INTER_MS);		
 		}
-		
-		
 		busy = FALSE;
 	}
 
@@ -129,6 +123,7 @@ implementation {
 			if(call DataSnd.send(dest, &pkt, sizeof (NodeADataMsg)) == SUCCESS)
 			{
 				call Leds.led2Toggle();
+				dataPacketCounter++;
 				
 			}
 			else
@@ -141,8 +136,6 @@ implementation {
 	}
 
 	event message_t * ProbeRcv.receive(message_t *msg, void *payload, uint8_t len){
-		receivedStats[statRCounter].rssi = call CC2420Packet.getRssi(msg) - 45;
-		receivedStats[statRCounter++].lqi = call CC2420Packet.getLqi(msg);
 		return msg;
 	}
 
@@ -152,6 +145,11 @@ implementation {
 			call Leds.led1Toggle();
 		}
 		busy = FALSE;
+		if (dataPacketCounter == 100) {
+			dataPacketCounter = 0;
+			call TimerData.stop();
+			call TimerProbe.startPeriodic(SEND_PROBE_INTER_MS);
+		}
 	}
 
 	event message_t * DataRcv.receive(message_t *msg, void *payload, uint8_t len){
