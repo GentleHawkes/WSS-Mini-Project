@@ -6,7 +6,7 @@
 <target>telosb</target>
 <make-extras>
 <extra name="install">
-<parameter ask="false" name="Mote Id">3</parameter>
+<parameter ask="false" name="Mote Id">21</parameter>
 </extra>
 </make-extras>
 <includes/>
