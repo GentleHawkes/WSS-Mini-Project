@@ -28,12 +28,12 @@ implementation {
 
 	uint8_t statSCounter = 0;
 	
-	static statTuple receivedStats[20];
-	static statTuple sentStats[20];
+	statTuple sentStats[20];
 	
-	int LQE_B = 0;	int LQE_C = 0;
+	int LQE_B = 0;
+	int LQE_C = 0;
 	
-	int dest = NODE_C_ADDR;
+	int dest = NODE_B_ADDR;
  
  	double calcLQE(int startI, int endI) {
  		double sumLqi = 0;
@@ -42,24 +42,22 @@ implementation {
  		for (; startI < endI; startI++) {
  			sumLqi += sentStats[startI].lqi;
  			sumRssi += sentStats[startI].rssi;
- 			
  		}
- 		printf("Mean_RSSI: %f\nmeanLQI_C: %f\n\n", sumRssi/10,sumLqi/10);
-				printfflush();
- 		return (sumLqi/10) *((sumRssi/10)/60 + constant);
+ 		printf("Mean_RSSI: %F\nMeanLQI: %F\n\n", sumRssi/10, sumLqi/10);
+		printfflush();
+ 		return (sumLqi/10) * ((sumRssi/10)/60 + constant);
  	}
  	
  	void setDestination() {
- 		dest = LQE_B - LQE_C > 30 ? NODE_B_ADDR : NODE_C_ADDR;
- 			if (LQE_B - LQE_C >= 30 && LQE_B != 0) {
+ 			if (LQE_B - LQE_C >= 10 && LQE_B != 0) {
  				dest = NODE_B_ADDR;
- 			} else if (LQE_B - LQE_C < 30 && LQE_C != 0){
- 				dest = LQE_C;
+ 			} else if (LQE_B - LQE_C < 10 && LQE_C != 0){
+ 				dest = NODE_C_ADDR;
  			} else {
- 				
+ 				dest = 0;
  			}
  		
- 		printf("Currend destination: %s\n\n", dest == NODE_B_ADDR ? "Node B" : "Node C");
+ 		printf("Current destination: %s\n\n", dest == NODE_B_ADDR ? "Node B" : "Node C");
  		printfflush();
  	}
  	
@@ -81,16 +79,17 @@ implementation {
 		if (!busy) {
 			NodeAProbeMsg* btrpkt = (NodeAProbeMsg*)(call Packet.getPayload(&pkt, sizeof (NodeAProbeMsg)));
 			if (probeCounter == 10) {
-				dest = NODE_B_ADDR;
-			} else if(probeCounter == 0) {
 				dest = NODE_C_ADDR;
+			} else if(probeCounter == 0) {
+				dest = NODE_B_ADDR;
 			}
-			btrpkt->SeqCounter = probeCounter++;
+			btrpkt->SeqCounter = 10;
+			probeCounter++;
 			call CC2420Packet.setPower(&pkt, 1);
 			call packAck.requestAck(&pkt);
-			if(call ProbeSnd.send(dest, &pkt, sizeof (NodeAProbeMsg)) == SUCCESS) {
+			if (call ProbeSnd.send(dest, &pkt, sizeof (NodeAProbeMsg)) == SUCCESS) {
 				call Leds.led0Toggle();
-			} else {		
+			} else {	
 				call Leds.led1Toggle();
 			}
 			busy = TRUE;
@@ -99,10 +98,17 @@ implementation {
  
 	event void ProbeSnd.sendDone(message_t* msg, error_t error) { 
 		if (call packAck.wasAcked(msg)) {
-			sentStats[statSCounter].rssi = call CC2420Packet.getRssi(msg) - 45;
+			if (statSCounter > 9) {
+ 				sentStats[statSCounter].rssi = call CC2420Packet.getRssi(msg) - 97;
+				//printf("Rssi C: %d\n\n", sentStats[statSCounter].rssi);
+ 			} else {
+ 				sentStats[statSCounter].rssi = call CC2420Packet.getRssi(msg) - 45;
+ 				//printf("Rssi B: %d\n\n", sentStats[statSCounter].rssi);
+ 			}
+ 		
 			sentStats[statSCounter++].lqi = call CC2420Packet.getLqi(msg);
-			printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg));
-			printfflush();
+			//printf("LQI: %u\nRSSI: %d\n\n", call CC2420Packet.getLqi(msg), call CC2420Packet.getRssi(msg) - 45);
+			//printfflush();
 		} else {
 			sentStats[statSCounter].rssi = -100;
 			sentStats[statSCounter++].lqi = 66;
@@ -112,9 +118,9 @@ implementation {
 				call TimerProbe.stop();
 				LQE_B = (int)calcLQE(0, 10);
 				LQE_C = (int)calcLQE(10, 20);
-				printf("LQE_B: %d\nLQE_C: %d\n\n", LQE_B,LQE_C);
+				printf("LQE_B: %d\nLQE_C: %d\n\n", LQE_B, LQE_C);
 				printfflush();
-				statSCounter=0;
+				statSCounter = 0;
 				setDestination();
 				call TimerData.startPeriodic(SEND_DATA_INTER_MS);		
 		}
@@ -140,7 +146,6 @@ implementation {
 			}
 			busy = TRUE;
 		}
-		
 	}
 
 	event message_t * ProbeRcv.receive(message_t *msg, void *payload, uint8_t len){
