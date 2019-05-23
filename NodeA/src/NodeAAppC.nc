@@ -8,6 +8,7 @@ implementation{
   components NodeAC as App;
   components new TimerMilliC() as Timer0;
   components new TimerMilliC() as Timer1;
+  components new TimerMilliC() as Timer2;
   components ActiveMessageC;
   components new AMSenderC(AM_PROBE);
   components new AMReceiverC(AM_PROBE);
@@ -19,6 +20,7 @@ implementation{
   App.Leds -> LedsC;
   App.TimerProbe -> Timer0;
   App.TimerData -> Timer1;
+  App.WaitTimer -> Timer2;
   App.Packet -> AMSenderC;
   App.AMPacket -> AMSenderC;
   App.ProbeSnd -> AMSenderC;
