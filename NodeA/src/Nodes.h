@@ -4,11 +4,6 @@ enum {
 	SEND_PROBE_INTER_MS = 100,
 	SEND_DATA_INTER_MS = 200,
 	
-	TIMER_PERIOD_MILLI = 250,
-   	DATA_TIMEOUT_MS = 100,
-   	PROBE_TIMEOUT_MS = 750,
-   	LED_TIMEOUT_MS = 100,
-	
 	AM_PROBE = 219,
    	AM_DATA = 169,
    	
@@ -17,9 +12,9 @@ enum {
 
 
 enum {
-	NODE_A_ADDR = 10,
-	NODE_B_ADDR = 11,
-	NODE_C_ADDR = 12 // 692
+	NODE_A_ADDR = 690,
+	NODE_B_ADDR = 691,
+	NODE_C_ADDR = 692
 };
 
 typedef nx_struct NodeAProbeMsg {
